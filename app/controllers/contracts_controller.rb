@@ -1,5 +1,5 @@
 class ContractsController < ApplicationController
-  before_action :set_contract, only: [:show, :edit, :update, :destroy]
+  before_action :set_contract, only: [:show, :destroy]
 
   # GET /contracts
   def index
@@ -8,17 +8,12 @@ class ContractsController < ApplicationController
 
   # GET /contracts/1
   def show
-    @contract = Contract.find(params[:id])
     @renting_phases = @contract.renting_phases
   end
 
   # GET /contracts/new
   def new
     @contract = Contract.new
-  end
-
-  # GET /contracts/1/edit
-  def edit
   end
 
   # POST /contracts
@@ -29,15 +24,6 @@ class ContractsController < ApplicationController
       redirect_to @contract, notice: 'Contract was successfully created.'
     else
       render :new
-    end
-  end
-
-  # PATCH/PUT /contracts/1
-  def update
-    if @contract.update(contract_params)
-      redirect_to @contract, notice: 'Contract was successfully updated.'
-    else
-      render :edit
     end
   end
 

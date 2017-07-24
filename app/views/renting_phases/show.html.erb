@@ -1,3 +1,5 @@
+<h1>Renting Phase 交租阶段</h1>
+
 <p>
   <strong>Start date:</strong>
   <%= @renting_phase.start_date %>
@@ -20,8 +22,29 @@
 
 <p>
   <strong>Contract:</strong>
-  <%= @renting_phase.contract %>
+  <%= @renting_phase.contract.title %>
 </p>
 
-<%= link_to 'Edit', edit_renting_phase_path(@renting_phase) %> |
-<%= link_to 'Back', contract_renting_phases_path(@contract, @renting_phase) %>
+<h2>本交租阶段账单列表</h2>
+
+<table class="table">
+  <thead>
+   <tr>
+      <th>账单开始日期</th>
+      <th>账单截止日期</th>
+      <th>总价</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.start_date %></td>
+        <td><%= invoice.end_date %></td>
+        <td><%= invoice.total %></td>
+        <td><%= link_to 'Show', contract_renting_phase_invoice_path(@contract, @renting_phase, invoice) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', contract_path(@contract) %>

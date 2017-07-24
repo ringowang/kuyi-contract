@@ -1,3 +1,5 @@
+<h1>Invoice 账单</h1>
+
 <p>
   <strong>Start date:</strong>
   <%= @invoice.start_date %>
@@ -18,10 +20,30 @@
   <%= @invoice.total %>
 </p>
 
-<p>
-  <strong>Renting phase:</strong>
-  <%= @invoice.renting_phase %>
-</p>
+<h2>本账单明细</h2>
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+<table class="table">
+  <thead>
+   <tr>
+      <th>明细开始日期</th>
+      <th>明细截止日期</th>
+      <th>单价</th>
+      <th>月数/天数</th>
+      <th>总价</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @line_items.each do |line_item| %>
+      <tr>
+        <td><%= line_item.start_date %></td>
+        <td><%= line_item.end_date %></td>
+        <td><%= line_item.unit_price %></td>
+        <td><%= line_item.units %></td>
+        <td><%= line_item.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Back', contract_renting_phase_path(@contract, @renting_phase) %>

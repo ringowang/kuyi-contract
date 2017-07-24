@@ -31,13 +31,11 @@
         <td><%= renting_phase.price %></td>
         <td><%= renting_phase.cycles %></td>
         <td><%= link_to 'Show', contract_renting_phase_path(@contract, renting_phase) %></td>
-        <td><%= link_to 'Edit', edit_contract_renting_phase_path(@contract, renting_phase) %></td>
         <td><%= link_to 'Destroy', contract_renting_phase_path(@contract, renting_phase), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_contract_path(@contract) %> |
 <%= link_to 'Back', contracts_path %> |
 <%= link_to 'New Renting Phase', new_contract_renting_phase_path(@contract) %>
