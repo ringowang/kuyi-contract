@@ -3,12 +3,12 @@
 
   <div class="field">
     <%= form.label :start_date %>
-    <%= form.date_select :start_date, id: :renting_phase_start_date %>
+    <%= form.date_select :start_date, id: :renting_phase_start_date, default: @point_time,use_month_numbers: true %>
   </div>
 
   <div class="field">
     <%= form.label :end_date %>
-    <%= form.date_select :end_date, id: :renting_phase_end_date %>
+    <%= form.date_select :end_date, id: :renting_phase_end_date, default: (@point_time + 1.day), use_month_numbers: true %>
   </div>
 
   <div class="field">
@@ -19,11 +19,6 @@
   <div class="field">
     <%= form.label :cycles %>
     <%= form.number_field :cycles, id: :renting_phase_cycles %>
-  </div>
-
-  <div class="field">
-    <%= form.label :contract_id %>
-    <%= form.text_field :contract_id, id: :renting_phase_contract_id %>
   </div>
 
   <div class="actions">

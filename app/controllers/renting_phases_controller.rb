@@ -14,10 +14,14 @@ class RentingPhasesController < ApplicationController
   def new
     @contract = Contract.find(params[:contract_id])
     @renting_phase = RentingPhase.new
+    @point_time = @contract.renting_phases.present? ? @contract.renting_phases.last.end_date + 1.day : @contract.start_date
   end
 
   # GET /renting_phases/1/edit
   def edit
+    @contract = Contract.find(params[:contract_id])
+    @renting_phase = @contract.renting_phases.find(params[:id])
+    @point_time = @contract.renting_phases.present? ? @contract.renting_phases.last.end_date + 1.day : @contract.start_date
   end
 
   # POST /renting_phases
@@ -25,6 +29,7 @@ class RentingPhasesController < ApplicationController
     @contract = Contract.find(params[:contract_id])
     @renting_phase = RentingPhase.new(renting_phase_params)
     @renting_phase.contract = @contract
+    @point_time = @contract.renting_phases.present? ? @contract.renting_phases.last.end_date + 1.day : @contract.start_date
 
     if @renting_phase.save
       redirect_to contract_path(@contract), notice: 'Renting phase was successfully created.'
@@ -36,8 +41,10 @@ class RentingPhasesController < ApplicationController
   # PATCH/PUT /renting_phases/1
   def update
     @contract = Contract.find(params[:contract_id])
+    @renting_phase = @contract.renting_phases.find(params[:id])
+    @point_time = @contract.renting_phases.present? ? @contract.renting_phases.last.end_date + 1.day : @contract.start_date
     if @renting_phase.update(renting_phase_params)
-      redirect_to @renting_phase, notice: 'Renting phase was successfully updated.'
+      redirect_to contract_path(@contract), notice: 'Renting phase was successfully updated.'
     else
       render :edit
     end
