@@ -1,9 +1,9 @@
 class RentingPhasesController < ApplicationController
-  before_action :set_renting_phase, only: [:show, :edit, :update, :destroy]
 
   # GET /renting_phases
   def index
-    @renting_phases = RentingPhase.all
+    @contract = Contract.find(params[:contract_id])
+    @renting_phases = @contract.renting_phases
   end
 
   # GET /renting_phases/1
@@ -12,6 +12,7 @@ class RentingPhasesController < ApplicationController
 
   # GET /renting_phases/new
   def new
+    @contract = Contract.find(params[:contract_id])
     @renting_phase = RentingPhase.new
   end
 
@@ -21,10 +22,12 @@ class RentingPhasesController < ApplicationController
 
   # POST /renting_phases
   def create
+    @contract = Contract.find(params[:contract_id])
     @renting_phase = RentingPhase.new(renting_phase_params)
+    @renting_phase.contract = @contract
 
     if @renting_phase.save
-      redirect_to @renting_phase, notice: 'Renting phase was successfully created.'
+      redirect_to contract_path(@contract), notice: 'Renting phase was successfully created.'
     else
       render :new
     end
@@ -32,6 +35,7 @@ class RentingPhasesController < ApplicationController
 
   # PATCH/PUT /renting_phases/1
   def update
+    @contract = Contract.find(params[:contract_id])
     if @renting_phase.update(renting_phase_params)
       redirect_to @renting_phase, notice: 'Renting phase was successfully updated.'
     else
@@ -41,15 +45,13 @@ class RentingPhasesController < ApplicationController
 
   # DELETE /renting_phases/1
   def destroy
+    @contract = Contract.find(params[:contract_id])
+    @renting_phase = @contract.renting_phases.find(params[:id])
     @renting_phase.destroy
-    redirect_to renting_phases_url, notice: 'Renting phase was successfully destroyed.'
+    redirect_to contract_url(@contract), notice: 'Renting phase was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_renting_phase
-      @renting_phase = RentingPhase.find(params[:id])
-    end
 
     # Only allow a trusted parameter "white list" through.
     def renting_phase_params

@@ -8,6 +8,8 @@ class ContractsController < ApplicationController
 
   # GET /contracts/1
   def show
+    @contract = Contract.find(params[:id])
+    @renting_phases = @contract.renting_phases
   end
 
   # GET /contracts/new

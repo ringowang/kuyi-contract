@@ -13,5 +13,31 @@
   <%= @contract.end_date %>
 </p>
 
+
+<table class="table">
+  <thead>
+   <tr>
+      <th>交租阶段开始日期</th>
+      <th>交租阶段截止日期</th>
+      <th>月租金</th>
+      <th>几月交一次</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @renting_phases.each do |renting_phase| %>
+      <tr>
+        <td><%= renting_phase.start_date %></td>
+        <td><%= renting_phase.end_date %></td>
+        <td><%= renting_phase.price %></td>
+        <td><%= renting_phase.cycles %></td>
+        <td><%= link_to 'Show', contract_renting_phase_path(@contract, renting_phase) %></td>
+        <td><%= link_to 'Edit', edit_contract_renting_phase_path(@contract, renting_phase) %></td>
+        <td><%= link_to 'Destroy', contract_renting_phase_path(@contract, renting_phase), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_contract_path(@contract) %> |
-<%= link_to 'Back', contracts_path %>
+<%= link_to 'Back', contracts_path %> |
+<%= link_to 'New Renting Phase', new_contract_renting_phase_path(@contract) %>
