@@ -1,15 +1,5 @@
 <%= form_with(model: renting_phase, local: true) do |form| %>
-  <% if renting_phase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(renting_phase.errors.count, "error") %> prohibited this renting_phase from being saved:</h2>
-
-      <ul>
-      <% renting_phase.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/error_messages', model: @renting_phase %>
 
   <div class="field">
     <%= form.label :start_date %>
