@@ -11,9 +11,7 @@
   <body>
     <div class="container-fluid">
         <%= render "common/navbar" %>
-        <% flash.each do |message_type, message| %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %>
+        <%= notice_message %>
         <%= yield %>
     </div>
 
