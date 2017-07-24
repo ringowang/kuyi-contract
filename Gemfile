@@ -33,6 +33,7 @@ gem 'turbolinks', '~> 5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
 gem 'bootstrap-sass'
 
 group :development, :test do
@@ -42,6 +43,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :development do

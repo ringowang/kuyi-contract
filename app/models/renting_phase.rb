@@ -13,7 +13,7 @@ class RentingPhase < ApplicationRecord
     tem_date = start_date
     invoice_start_date = start_date
     left_days = end_date - start_date
-    while tem_date + 1.month <= end_date
+    while tem_date + 1.month - 1.day <= end_date
       months_count += 1
       if months_count == cycles
         cycles_count += 1

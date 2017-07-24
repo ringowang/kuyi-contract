@@ -1,10 +1,6 @@
 class RentingPhasesController < ApplicationController
-  before_action :set_contract, only: [:show, :index, :destroy, :new]
-  before_action :set_renting_phase, only: [:show, :create, :destroy]
-  # GET /renting_phases
-  def index
-    @renting_phases = @contract.renting_phases
-  end
+  before_action :set_contract, only: [:show, :destroy, :new, :create]
+  before_action :set_renting_phase, only: [:show, :destroy]
 
   # GET /renting_phases/1
   def show
@@ -19,6 +15,7 @@ class RentingPhasesController < ApplicationController
 
   # POST /renting_phases
   def create
+    @renting_phase = RentingPhase.new(renting_phase_params)
     @renting_phase.contract = @contract
     @point_time = @contract.renting_phases.present? ? @contract.renting_phases.last.end_date + 1.day : @contract.start_date
 
@@ -42,6 +39,7 @@ class RentingPhasesController < ApplicationController
     end
 
     def set_renting_phase
+      @contract = Contract.find(params[:contract_id])
       @renting_phase = @contract.renting_phases.find(params[:id])
     end
 
