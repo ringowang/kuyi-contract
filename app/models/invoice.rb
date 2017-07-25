@@ -1,6 +1,9 @@
 class Invoice < ApplicationRecord
   belongs_to :renting_phase
   has_many :line_items, dependent: :destroy
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :total, presence: true
 
   def generate_cycle_line_items
     renting_phase = self.renting_phase

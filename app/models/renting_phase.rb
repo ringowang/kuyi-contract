@@ -4,6 +4,10 @@ class RentingPhase < ApplicationRecord
   validate :start_date_must_before_than_end_date
   validate :date_must_in_contract_date
   validate :date_cannot_repeat
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :price, presence: true
+  validates :cycles, presence: true
 
   has_many :invoices, dependent: :destroy
 
